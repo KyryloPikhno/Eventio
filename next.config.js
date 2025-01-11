@@ -1,4 +1,4 @@
-const {withBlitz} = require("@blitzjs/next")
+const { withBlitz } = require("@blitzjs/next")
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
