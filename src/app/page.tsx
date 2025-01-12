@@ -1,6 +1,6 @@
 import Link from "next/link"
-import {invoke} from "./blitz-server"
-import {LogoutButton} from "./(auth)/components/LogoutButton"
+import { invoke } from "./blitz-server"
+import { LogoutButton } from "./(auth)/components/LogoutButton"
 import styles from "./styles/Home.module.css"
 import getCurrentUser from "./users/queries/getCurrentUser"
 
@@ -87,8 +87,7 @@ export default async function Home() {
                     <span>4</span>
                     <pre>
                       <code>
-                        Go to{" "}
-                        {/* @ts-ignore: TODO remove after scaffolding */}
+                        Go to {/* @ts-ignore: TODO remove after scaffolding */}
                         <Link href="/projects" className={styles.textLink}>
                           /projects
                         </Link>
