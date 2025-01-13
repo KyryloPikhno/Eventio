@@ -1,8 +1,11 @@
-import Link from "next/link"
+"use client"
+
+import { LogoutButton } from "@/app/auth/components/LogoutButton"
+import getCurrentUser from "@/app/users/queries/getCurrentUser"
 import { invoke } from "@blitzjs/rpc"
-import { useEffect, useState } from "react"
 import { User } from "@prisma/client"
-import getCurrentUser from "../users/queries/getCurrentUser"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export default function UserInfo() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
