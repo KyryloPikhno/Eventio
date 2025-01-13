@@ -1,24 +1,23 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import Link from "next/link"
-import getCurrentUser from "../users/queries/getCurrentUser"
 import { invoke } from "@blitzjs/rpc"
-import { LogoutButton } from "../(auth)/components/LogoutButton"
-
-type User = {
-  id: number
-  name: string | null
-  email: string
-  role: string
-}
+import { useEffect, useState } from "react"
+import { User } from "@prisma/client"
+import getCurrentUser from "../users/queries/getCurrentUser"
 
 export default function UserInfo() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
 
   useEffect(() => {
-    invoke(getCurrentUser, null).then(setCurrentUser)
+    async function fetchUser() {
+      const user = await invoke(getCurrentUser, null)
+      setCurrentUser(user as User)
+    }
+    fetchUser()
   }, [])
+
+  if (currentUser === null) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
