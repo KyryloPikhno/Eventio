@@ -1,8 +1,7 @@
+import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from "@mantine/core"
 import "@mantine/core/styles.css"
 import { Inter } from "next/font/google"
 import { BlitzProvider } from "./blitz-client"
-
-import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from "@mantine/core"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -15,13 +14,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+        />
         <ColorSchemeScript defaultColorScheme="dark" />
       </head>
       <body className={inter.className}>
         <MantineProvider defaultColorScheme="dark">
-          <BlitzProvider>
-            <>{children}</>
-          </BlitzProvider>
+          <BlitzProvider>{children}</BlitzProvider>
         </MantineProvider>
       </body>
     </html>
