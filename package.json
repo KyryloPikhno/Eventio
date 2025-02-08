@@ -28,7 +28,7 @@
     "@blitzjs/rpc": "2.2.0",
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "2.9.11",
-    "@mantine/core": "^7.16.2",
+    "@mantine/core": "^7.16.3",
     "@mantine/hooks": "^7.16.3",
     "@prisma/client": "5.4.2",
     "blitz": "2.2.0",
