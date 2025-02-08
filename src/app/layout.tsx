@@ -10,6 +10,7 @@ import {
   Text,
 } from "@mantine/core"
 import "@mantine/core/styles.css"
+import moment from "moment"
 import { Inter } from "next/font/google"
 import { BlitzProvider } from "./blitz-client"
 
@@ -20,6 +21,8 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const currentYear = moment().format("YYYY")
+
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
@@ -45,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               <AppShellFooter>
                 <Group justify="center" h="100%">
-                  <Text size="sm">© 2025 Your App. All rights reserved.</Text>
+                  <Text size="sm">© {currentYear} Eventio. All rights reserved.</Text>
                 </Group>
               </AppShellFooter>
             </BlitzProvider>

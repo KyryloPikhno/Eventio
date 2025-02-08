@@ -31,6 +31,8 @@ export default function UserInfo() {
             User id: <code>{currentUser.id}</code>
             <br />
             User role: <code>{currentUser.role}</code>
+            <br />
+            User role: <code>{currentUser.email}</code>
           </div>
         </>
       ) : (
