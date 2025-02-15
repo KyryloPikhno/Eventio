@@ -1,5 +1,6 @@
 "use client"
 
+import { currentYear } from "@/app/utils/date"
 import {
   AppShell,
   AppShellFooter,
@@ -12,15 +13,12 @@ import {
 } from "@mantine/core"
 import "@mantine/core/styles.css"
 import { useDisclosure } from "@mantine/hooks"
-import moment from "moment"
 import { Inter } from "next/font/google"
 import { BlitzProvider } from "./blitz-client"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const currentYear = moment().format("YYYY")
-
   const [opened, { toggle }] = useDisclosure()
 
   return (
@@ -48,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <AppShell.Header>
                 <Group justify="start" pl="8" h="100%">
                   <Burger opened={opened} onClick={toggle} size="sm" />
-                  <div>Eventio</div>
+                  <Text>Eventio</Text>
                 </Group>
               </AppShell.Header>
 
