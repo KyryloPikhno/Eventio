@@ -20,6 +20,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const currentYear = moment().format("YYYY")
+
   const [opened, { toggle }] = useDisclosure()
 
   return (
