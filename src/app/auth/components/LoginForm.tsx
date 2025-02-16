@@ -18,6 +18,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
   const router = useRouter()
   const next = useSearchParams()?.get("next")
+
   return (
     <>
       <h1>Login</h1>

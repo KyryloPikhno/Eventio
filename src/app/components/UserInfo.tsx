@@ -3,6 +3,7 @@
 import { LogoutButton } from "@/app/auth/components/LogoutButton"
 import getCurrentUser from "@/app/users/queries/getCurrentUser"
 import { invoke } from "@blitzjs/rpc"
+import { Button, Stack } from "@mantine/core"
 import { User } from "@prisma/client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -30,21 +31,21 @@ export default function UserInfo() {
       {currentUser ? (
         <>
           <LogoutButton />
-          <div>
+          <Stack gap="8">
             User id: <code>{currentUser.id}</code>
             User role: <code>{currentUser.role}</code>
             User role: <code>{currentUser.email}</code>
-          </div>
+          </Stack>
         </>
       ) : (
-        <>
-          <Link href="/auth/signup">
-            <strong>Sign Up</strong>
-          </Link>
-          <Link href="/auth/login">
-            <strong>Login</strong>
-          </Link>
-        </>
+        <Stack gap="8">
+          <Button component={Link} href="/auth/signup">
+            Sign Up
+          </Button>
+          <Button component={Link} href="/auth/login">
+            Login
+          </Button>
+        </Stack>
       )}
     </div>
   )
