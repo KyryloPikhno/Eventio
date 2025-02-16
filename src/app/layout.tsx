@@ -1,5 +1,6 @@
 "use client"
 
+import { BlitzProvider } from "@/app/blitz-client"
 import { currentYear } from "@/app/utils/date"
 import {
   AppShell,
@@ -14,7 +15,6 @@ import {
 import "@mantine/core/styles.css"
 import { useDisclosure } from "@mantine/hooks"
 import { Inter } from "next/font/google"
-import { BlitzProvider } from "./blitz-client"
 
 const inter = Inter({ subsets: ["latin"] })
 
