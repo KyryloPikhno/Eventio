@@ -3,6 +3,7 @@
 import { BlitzProvider } from "@/app/blitz-client"
 import { currentYear } from "@/app/utils/date"
 import {
+  Anchor,
   AppShell,
   AppShellFooter,
   AppShellMain,
@@ -10,6 +11,7 @@ import {
   ColorSchemeScript,
   Group,
   MantineProvider,
+  Stack,
   Text,
 } from "@mantine/core"
 import "@mantine/core/styles.css"
@@ -33,20 +35,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <MantineProvider defaultColorScheme="dark">
           <AppShell
+            padding="md"
             header={{ height: 60 }}
-            footer={{ height: 60 }}
+            footer={{ height: 100 }}
             navbar={{
               width: 300,
               breakpoint: "sm",
               collapsed: { mobile: !opened, desktop: !opened },
             }}
-            padding="md"
           >
             <BlitzProvider>
               <AppShell.Header>
                 <Group justify="start" pl="8" h="100%">
                   <Burger opened={opened} onClick={toggle} size="sm" />
-                  <Text>Eventio</Text>
+                  <Text fw="bold">Eventio</Text>
                 </Group>
               </AppShell.Header>
 
@@ -54,9 +56,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               <AppShellMain>{children}</AppShellMain>
 
-              <AppShellFooter>
+              <AppShellFooter h="100px">
                 <Group justify="center" h="100%">
-                  <Text size="sm">© {currentYear} Eventio. All rights reserved.</Text>
+                  <Stack py="2" align="center">
+                    <Text fw="bold" size="sm">
+                      © {currentYear} Eventio. All rights reserved.
+                    </Text>
+                    <Anchor size="sm" href="https://github.com/KyryloPikhno">
+                      My GitHub
+                    </Anchor>
+                  </Stack>
                 </Group>
               </AppShellFooter>
             </BlitzProvider>

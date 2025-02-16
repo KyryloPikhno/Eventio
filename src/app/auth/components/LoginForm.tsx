@@ -1,14 +1,14 @@
 "use client"
-import {AuthenticationError, PromiseReturnType} from "blitz"
+
+import login from "@/app/auth/mutations/login"
+import { Login } from "@/app/auth/validations"
+import { Form, FORM_ERROR } from "@/app/components/Form"
+import LabeledTextField from "@/app/components/LabeledTextField"
+import { useMutation } from "@blitzjs/rpc"
+import { AuthenticationError, PromiseReturnType } from "blitz"
+import type { Route } from "next"
 import Link from "next/link"
-import {LabeledTextField} from "src/app/components/LabeledTextField"
-import {Form, FORM_ERROR} from "src/app/components/Form"
-import login from "../mutations/login"
-import {Login} from "../validations"
-import {useMutation} from "@blitzjs/rpc"
-import {useSearchParams} from "next/navigation"
-import {useRouter} from "next/navigation"
-import type {Route} from "next"
+import { useRouter, useSearchParams } from "next/navigation"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void
@@ -18,6 +18,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
   const router = useRouter()
   const next = useSearchParams()?.get("next")
+
   return (
     <>
       <h1>Login</h1>
@@ -25,7 +26,7 @@ export const LoginForm = (props: LoginFormProps) => {
       <Form
         submitText="Login"
         schema={Login}
-        initialValues={{email: "", password: ""}}
+        initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
           try {
             await loginMutation(values)
@@ -37,7 +38,7 @@ export const LoginForm = (props: LoginFormProps) => {
             }
           } catch (error: any) {
             if (error instanceof AuthenticationError) {
-              return {[FORM_ERROR]: "Sorry, those credentials are invalid"}
+              return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
             } else {
               return {
                 [FORM_ERROR]:
@@ -50,12 +51,12 @@ export const LoginForm = (props: LoginFormProps) => {
         <LabeledTextField name="email" label="Email" placeholder="Email" />
         <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
         <div>
-          <Link href={"/forgot-password"}>Forgot your password?</Link>
+          <Link href="/auth/forgot-password">Forgot your password?</Link>
         </div>
       </Form>
 
-      <div style={{marginTop: "1rem"}}>
-        Or <Link href="/signup">Sign Up</Link>
+      <div style={{ marginTop: "1rem" }}>
+        Or <Link href="/auth/signup">Sign Up</Link>
       </div>
     </>
   )
