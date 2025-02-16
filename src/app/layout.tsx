@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <AppShell.Header>
                 <Group justify="start" pl="8" h="100%">
                   <Burger opened={opened} onClick={toggle} size="sm" />
-                  <Text>Eventio</Text>
+                  <Text fw="bold">Eventio</Text>
                 </Group>
               </AppShell.Header>
 
@@ -56,7 +56,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               <AppShellFooter>
                 <Group justify="center" h="100%">
-                  <Text size="sm">© {currentYear} Eventio. All rights reserved.</Text>
+                  <Text fw="bold" size="sm">
+                    © {currentYear} Eventio. All rights reserved.
+                  </Text>
                 </Group>
               </AppShellFooter>
             </BlitzProvider>

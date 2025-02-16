@@ -9,16 +9,19 @@ import { useEffect, useState } from "react"
 
 export default function UserInfo() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function fetchUser() {
+      setLoading(true)
       const user = await invoke(getCurrentUser, null)
       setCurrentUser(user as User)
+      setLoading(false)
     }
     fetchUser()
   }, [])
 
-  if (currentUser === null) {
+  if (loading) {
     return <div>Loading...</div>
   }
 
@@ -29,18 +32,16 @@ export default function UserInfo() {
           <LogoutButton />
           <div>
             User id: <code>{currentUser.id}</code>
-            <br />
             User role: <code>{currentUser.role}</code>
-            <br />
             User role: <code>{currentUser.email}</code>
           </div>
         </>
       ) : (
         <>
-          <Link href="/signup">
+          <Link href="/auth/signup">
             <strong>Sign Up</strong>
           </Link>
-          <Link href="/login">
+          <Link href="/auth/login">
             <strong>Login</strong>
           </Link>
         </>
