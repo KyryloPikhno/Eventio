@@ -1,10 +1,10 @@
 "use client"
 
 import resetPassword from "@/app/auth/mutations/resetPassword"
-import { ResetPassword } from "@/app/auth/validations"
-import { Form, FORM_ERROR } from "@/app/components/Form"
-import LabeledTextField from "@/app/components/LabeledTextField"
+import { FORM_ERROR } from "@/app/components/Form"
 import { useMutation } from "@blitzjs/rpc"
+import { Button, PasswordInput, Stack, Text, Title } from "@mantine/core"
+import { useForm } from "@mantine/form"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 
@@ -13,50 +13,63 @@ export function ResetPasswordForm() {
   const token = searchParams?.get("token")?.toString()
   const [resetPasswordMutation, { isSuccess }] = useMutation(resetPassword)
 
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      password: "",
+      passwordConfirmation: "",
+    },
+
+    // validate: {},
+  })
+
+  const handleSubmit = async (values: any) => {
+    try {
+      console.log("values", values)
+
+      await resetPasswordMutation({ ...values, token })
+    } catch (error: any) {
+      if (error.name === "ResetPasswordError") {
+        return {
+          [FORM_ERROR]: error.message,
+        }
+      } else {
+        return {
+          [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
+        }
+      }
+    }
+  }
+
   return (
-    <div>
-      <h1>Set a New Password</h1>
+    <Stack>
+      <Title>Set a New Password</Title>
 
       {isSuccess ? (
-        <div>
-          <h2>Password Reset Successfully</h2>
-          <p>
+        <Stack>
+          <Title>Password Reset Successfully</Title>
+          <Text>
             Go to the <Link href="/">homepage</Link>
-          </p>
-        </div>
+          </Text>
+        </Stack>
       ) : (
-        <Form
-          submitText="Reset Password"
-          schema={ResetPassword}
-          initialValues={{
-            password: "",
-            passwordConfirmation: "",
-            token,
-          }}
-          onSubmit={async (values) => {
-            try {
-              await resetPasswordMutation({ ...values, token })
-            } catch (error: any) {
-              if (error.name === "ResetPasswordError") {
-                return {
-                  [FORM_ERROR]: error.message,
-                }
-              } else {
-                return {
-                  [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
-                }
-              }
-            }
-          }}
-        >
-          <LabeledTextField name="password" label="New Password" type="password" />
-          <LabeledTextField
-            name="passwordConfirmation"
-            label="Confirm New Password"
-            type="password"
+        <form onSubmit={form.onSubmit(handleSubmit)}>
+          <PasswordInput
+            withAsterisk
+            label="Password"
+            key={form.key("password")}
+            {...form.getInputProps("password")}
           />
-        </Form>
+          <PasswordInput
+            withAsterisk
+            label="Confirm New Password"
+            key={form.key("passwordConfirmation")}
+            {...form.getInputProps("passwordConfirmation")}
+          />
+
+          <Button type="submit">Reset Password</Button>
+        </form>
       )}
-    </div>
+    </Stack>
   )
 }
