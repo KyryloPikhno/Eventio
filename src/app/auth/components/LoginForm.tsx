@@ -67,7 +67,6 @@ export const LoginForm = (props: LoginFormProps) => {
         <PasswordInput
           withAsterisk
           label="Password"
-          placeholder="your@email.com"
           key={form.key("password")}
           {...form.getInputProps("password")}
         />
