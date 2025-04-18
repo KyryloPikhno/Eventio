@@ -50,7 +50,7 @@ export const SignupForm = (props: SignupFormProps) => {
         <TextInput
           withAsterisk
           label="Email"
-          placeholder="your@email.com"
+          placeholder="Enter your email"
           key={form.key("email")}
           {...form.getInputProps("email")}
         />
